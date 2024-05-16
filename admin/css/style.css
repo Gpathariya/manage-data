@@ -1,0 +1,154 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.logo {
+  border-radius: 80%;
+  height: 80px;
+  width: 150px;
+}
+.navbar_row {
+  background-color: aqua;
+}
+.wlcmuser {
+  color: blue;
+  font-weight: 700;
+}
+.logoutBtn {
+  font-size: xx-large;
+  color: blue;
+  text-decoration: none;
+  transition: all ease-in 0.1s;
+}
+
+.logoutBtn:hover {
+  color: grey;
+  text-decoration: underline;
+}
+.update_btn {
+  background-color: #00ff14;
+  font-weight: 600;
+  transition: all ease-in 0.1s;
+}
+.update_btn:hover {
+  background-color: aqua;
+}
+.delete_btn {
+  background-color: red;
+  font-weight: 600;
+  color: white;
+  transition: all ease-in 0.1s;
+}
+.delete_btn:hover {
+  background-color: aqua;
+  color: #000;
+}
+.footer {
+  background-color: rgb(6, 117, 117);
+  /* background-color: rgb(5, 162, 162); */
+  margin-top: 3rem;
+  color: #fff;
+}
+.profile_img {
+  border-radius: 50%;
+  height: 65px;
+  width: 65px;
+  object-fit: cover;
+}
+
+/* Signup page */
+.signup_row {
+  background-color: #00ff14;
+  height: 100%;
+  width: 100%;
+}
+*,
+*::after,
+*::before {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+.login_page {
+  background-image: linear-gradient(blue, rgb(115, 115, 224));
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* height: 100%; */
+  /* width: 100%; */
+}
+.update_page {
+  background-image: linear-gradient(blue, rgb(115, 115, 224));
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* height: 100%; */
+  /* width: 100%; */
+}
+.form_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.form_row {
+  height: 100%;
+  width: 45%;
+  background: #fff;
+  border-radius: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pass_input {
+  /* width: 90% !important ; */
+  /* display: inline-flex; */
+  display: inline-block;
+}
+.login_col_form {
+  width: 30%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login_form {
+  border-radius: 1.2rem;
+  border: #fff solid 1px;
+  padding: 2rem;
+  background-color: #fff;
+}
+.login-btn-link {
+  font-weight: 600;
+}
+.login-btn-link:visited {
+  border: none !important ;
+  text-decoration: none !important;
+}
+
+.login-btn-link:hover {
+  border: none !important ;
+  text-decoration: none !important;
+}
+
+.reg-btn-link {
+  font-weight: 600;
+}
+.reg-btn-link:visited {
+  border: none !important ;
+  text-decoration: none !important;
+}
+
+.reg-btn-link:hover {
+  border: none !important ;
+  text-decoration: none !important;
+}
+.profile-div img {
+  height: 60px;
+  width: 60px;
+  object-fit: contain;
+  border-radius: 50%;
+  background-color: black;
+}
