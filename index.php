@@ -4,7 +4,7 @@ if ($_SESSION['email'] && $_SESSION['password']) {
   include ("includes/header.php");
   include ("includes/navbar.php");
   ?>
-  <!-- sandeep kumar -->
+
   <!-- Slider -->
   <section>
     <div class="container-fluid">
