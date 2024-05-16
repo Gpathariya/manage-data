@@ -80,7 +80,7 @@ if (isset($_POST['login'])) {
 
                     <a href="signup.php" class="fs-6 reg-btn-link ms-lg-5">Want to sign up ?</a>
 
-                    <a href="" class="fs-6 reg-btn-link ms-lg-5">Forgot Password</a>
+                    <a href="forgot-password.php" class="fs-6 reg-btn-link ms-lg-5">Forgot Password</a>
 
                     <div class="container">
                         <div class="row">
