@@ -19,37 +19,58 @@ if (isset($_POST['submit'])) {
     $allowext = array("jpg", "gif", "text", "png", "pdf", "jpeg");
     $fileextension = pathinfo($filename, PATHINFO_EXTENSION);
 
-    if (empty($email) || empty($phone) || empty($name) || empty($password)) {
-        echo "<script>alert('Name, Email ,Phone And Password are required fields');window.location.href='signup.php'</script>";
-    } elseif (!$password == $con_password) {
-        echo "<script>alert('Passwords do not match');window.location.href='signup.php'</script>";
-    } elseif (!preg_match("/^[0-9]{10}$/", $phone)) {
-        echo "<script>alert('Inavalid Phone number. Please give valid number');window.location.href='signup.php'</script>";
-    } elseif (!in_array($fileextension, $allowext)) {
-        echo "<script>alert('This File Extension is not allowed);window.location.href='signup.php'</script>";
-    }
-
-    if (empty($_FILES['profile']['name'])) {
-        $defaultimg = 'img/default.png';
-        $new_filename = time() . "-" . basename($defaultimg);
-        copy($defaultimg, "upload-img/" . $new_filename);
-        $sql = "INSERT INTO `user` (name, email, phone, image, address, password, con_password,role) VALUES ('$name', '$email','$phone', '$new_filename', '$address', '$password', '$con_password','1')";
-        $qry = mysqli_query($con, $sql) or die("query failed" . mysqli_error($con));
-
-        if ($qry) {
-            echo "<script>alert('Your Data has been Inserted Successfully');window.location.href='login.php'</script>";
-        } else {
-            echo "<script>alert('Something went wrong');window.location.href='signup.php'</script>" . mysqli_error($con);
-        }
+    // $errors = [];
+    if (strlen($password) < 5) {
+        // $error[] = "Password length is too short";
+        // $errors[] = "Password must be at least 5 characters long.";
+        echo "<script>alert('Password must be at least 5 characters long');window.location.href='signup.php'</script>";
+    } elseif (!preg_match("/[A-Z]/", $password)) {
+        // $errors[] = "Password must include at least  one Uppercase letter";
+        echo "<script>alert('Password must include at least  one Uppercase letter');window.location.href='signup.php'</script>";
+    } elseif (!preg_match("/[a-z]/", $password)) {
+        // $errors[] = "Password must include at least  one lowercase letter";
+        echo "<script>alert('Password must include at least  one lowercase letter');window.location.href='signup.php'</script>";
+    } elseif (!preg_match("/[0-9]/", $password)) {
+        // $errors[] = "Password must include at least  one number";
+        echo "<script>alert('Password must include at least  one number');window.location.href='signup.php'</script>";
+    } elseif (!preg_match("/[\W_]/", $password)) {
+        //       /[\W_]/
+        // $errors[] = "Password must include at least one special character.";
+        echo "<script>alert('Password must include at least one special character.');window.location.href='signup.php'</script>";
     } else {
-        $new_filename = time() . "-" . basename($filename);
-        move_uploaded_file($file_tmp, "upload-img/" . $new_filename);
-        $sql = "INSERT INTO `user` (name, email, phone, image, address, password, con_password,role) VALUES ('$name', '$email','$phone', '$new_filename', '$address', '$password', '$con_password','1')";
-        $qry = mysqli_query($con, $sql) or die("query failed" . mysqli_error($con));
-        if ($qry) {
-            echo "<script>alert('Your Data has been Inserted Successfully');window.location.href='login.php'</script>";
+
+        if (empty($email) || empty($phone) || empty($name) || empty($password)) {
+            echo "<script>alert('Name, Email ,Phone And Password are required fields');window.location.href='signup.php'</script>";
+        } elseif (!$password == $con_password) {
+            echo "<script>alert('Passwords do not match');window.location.href='signup.php'</script>";
+        } elseif (!preg_match("/^[0-9]{10}$/", $phone)) {
+            echo "<script>alert('Inavalid Phone number. Please give valid number');window.location.href='signup.php'</script>";
+        } elseif (!in_array($fileextension, $allowext)) {
+            echo "<script>alert('This File Extension is not allowed);window.location.href='signup.php'</script>";
+        }
+
+        if (empty($_FILES['profile']['name'])) {
+            $defaultimg = 'img/default.png';
+            $new_filename = time() . "-" . basename($defaultimg);
+            copy($defaultimg, "upload-img/" . $new_filename);
+            $sql = "INSERT INTO `user` (name, email, phone, image, address, password, con_password,role) VALUES ('$name', '$email','$phone', '$new_filename', '$address', '$password', '$con_password','1')";
+            $qry = mysqli_query($con, $sql) or die("query failed" . mysqli_error($con));
+
+            if ($qry) {
+                echo "<script>alert('Your Data has been Inserted Successfully');window.location.href='login.php'</script>";
+            } else {
+                echo "<script>alert('Something went wrong');window.location.href='signup.php'</script>" . mysqli_error($con);
+            }
         } else {
-            echo "<script>alert('Something went wrong');window.location.href='signup.php'</script>" . mysqli_error($con);
+            $new_filename = time() . "-" . basename($filename);
+            move_uploaded_file($file_tmp, "upload-img/" . $new_filename);
+            $sql = "INSERT INTO `user` (name, email, phone, image, address, password, con_password,role) VALUES ('$name', '$email','$phone', '$new_filename', '$address', '$password', '$con_password','1')";
+            $qry = mysqli_query($con, $sql) or die("query failed" . mysqli_error($con));
+            if ($qry) {
+                echo "<script>alert('Your Data has been Inserted Successfully');window.location.href='login.php'</script>";
+            } else {
+                echo "<script>alert('Something went wrong');window.location.href='signup.php'</script>" . mysqli_error($con);
+            }
         }
     }
 }

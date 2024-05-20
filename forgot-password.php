@@ -59,9 +59,7 @@ if (isset($_POST['forgotPass'])) {
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($con);
     }
-
 }
-
 ?>
 
 <!DOCTYPE html>

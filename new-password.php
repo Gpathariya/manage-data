@@ -6,15 +6,38 @@ include ("config/db.php");
 if (isset($_POST['changepass'])) {
     // Step 3: Reset Password
     $new_password = $_POST['new_password'];
-    // Update the user's password in the database
+    $con_password = $_POST['con_password'];
 
-    $sql = "UPDATE user SET password = '$new_password' WHERE email = '{$_SESSION['reset_email']}'";
-    // Execute the SQL statement
-    if (mysqli_query($con, $sql)) {
-        unset($_SESSION['reset_email']);
-        unset($_SESSION['otp']);
-        echo "<script>alert('Now you can login. Thank you 🙌');window.location.href='login.php'</script>";
+    if (strlen($new_password) < 5) {
+        // $error[] = "Password length is too short";
+        // $errors[] = "Password must be at least 5 characters long.";
+        echo "<script>alert('Password must be at least 5 characters long');window.location.href='new-password.php'</script>";
+    } elseif (!preg_match("/[A-Z]/", $new_password)) {
+        // $errors[] = "Password must include at least  one Uppercase letter";
+        echo "<script>alert('Password must include at least  one Uppercase letter');window.location.href='new-password.php'</script>";
+    } elseif (!preg_match("/[a-z]/", $new_password)) {
+        // $errors[] = "Password must include at least  one lowercase letter";
+        echo "<script>alert('Password must include at least  one lowercase letter');window.location.href='new-password.php'</script>";
+    } elseif (!preg_match("/[0-9]/", $new_password)) {
+        // $errors[] = "Password must include at least  one number";
+        echo "<script>alert('Password must include at least  one number');window.location.href='new-password.php'</script>";
+    } elseif (!preg_match("/[\W_]/", $new_password)) {
+        //       /[\W_]/
+        // $errors[] = "Password must include at least one special character.";
+        echo "<script>alert('Password must include at least one special character.');window.location.href='new-password.php'</script>";
+    } elseif ($new_password != $con_password) {
+        echo "<script>alert('Password do not match.');window.location.href='new-password.php'</script>";
+    } else {
+        // Update the user's password in the database
+        $sql = "UPDATE user SET password = '$new_password' WHERE email = '{$_SESSION['reset_email']}'";
+        // Execute the SQL statement
+        if (mysqli_query($con, $sql)) {
+            unset($_SESSION['reset_email']);
+            unset($_SESSION['otp']);
+            echo "<script>alert('Thank you 🙌 Now you can login. ');window.location.href='login.php'</script>";
+        }
     }
+
 }
 
 ?>
